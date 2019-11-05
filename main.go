@@ -17,6 +17,9 @@ import (
 var T = gettext.T
 
 func MainDialog() int {
+	gettext.BindTextdomain("mycryptoqt", "locale.zip", localeData)
+	gettext.Textdomain("mycryptoqt")
+
 	app := widgets.NewQApplication(len(os.Args), os.Args)
 	window := widgets.NewQDialog(nil, core.Qt__Window)
 	window.SetWindowTitle(T("MyCrypto QT"))

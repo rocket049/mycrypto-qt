@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-05 14:04+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.go:25
+msgid "MyCrypto QT"
+msgstr "加密程序 MyCrypto QT"
+
+#: main.go:31 main.go:143
+msgid "Encrypt File By AES256"
+msgstr "用AES256算法加密文件"
+
+#: main.go:38 main.go:55
+msgid "Decrypt File By AES256"
+msgstr "用AES256算法解密文件"
+
+#: main.go:62 main.go:83
+msgid "Message Box"
+msgstr "信息框"
+
+#: main.go:65 main.go:161
+msgid "Input:"
+msgstr "输入："
+
+#: main.go:69 main.go:165
+msgid "Double click to select file."
+msgstr "双击鼠标选择文件"
+
+#: main.go:74 main.go:111 main.go:170 main.go:185
+msgid "Select a file to encrypt"
+msgstr "选择要加密的文件"
+
+#: main.go:81
+msgid "File Password"
+msgstr "文件密码"
+
+#: main.go:81 main.go:147
+msgid "Password:"
+msgstr "密码："
+
+#: main.go:92
+msgid "FileName:"
+msgstr "文件名："
+
+#: main.go:96
+msgid "Error Password!"
+msgstr "密码错误！"
+
+#: main.go:102 main.go:176
+msgid "Output:"
+msgstr "输出："
+
+#: main.go:106 main.go:180
+msgid "Double click to select directory."
+msgstr "双击鼠标选择目录"
+
+#: main.go:116
+msgid "Decrypt"
+msgstr "解密"
+
+#: main.go:129 main.go:210
+msgid "Error"
+msgstr "错误"
+
+#: main.go:132 main.go:213
+msgid "Successful!"
+msgstr "成功！"
+
+#: main.go:154
+msgid "Confirm:"
+msgstr "核对："
+
+#: main.go:190
+msgid "Encrypt"
+msgstr "加密"
+
+#: main.go:204
+msgid "Passwords are inconsistent"
+msgstr "密码不一致"
