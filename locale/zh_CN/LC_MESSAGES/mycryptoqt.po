@@ -92,3 +92,6 @@ msgstr "加密"
 #: main.go:204
 msgid "Passwords are inconsistent"
 msgstr "密码不一致"
+
+msgid "CryptoMode:"
+msgstr "加密算法："
