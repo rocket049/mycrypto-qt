@@ -87,7 +87,7 @@ func DecryptDialog() {
 				break
 			}
 
-			name, err = mycrypto.ReadNameFromFile(path1, pwd)
+			name, err = mycrypto.GetFilename(path1, pwd)
 			if err == nil {
 				msgLabel.SetText(T("FileName:") + name)
 				edit1.SetText(path1)
@@ -124,7 +124,7 @@ func DecryptDialog() {
 		}
 
 		dst = filepath.Join(dst, name)
-		err := mycrypto.DecryptoFromFile(src, dst, pwd)
+		err := mycrypto.DecryptoFile(src, dst, pwd)
 		if err != nil {
 			widgets.QMessageBox_About(window, T("Error"), err.Error())
 			window.Close()
@@ -144,27 +144,34 @@ func EncryptDialog() {
 
 	box := widgets.NewQGridLayout(window)
 
+	labelMode := widgets.NewQLabel2(T("CryptoMode:"), window, core.Qt__Widget)
+	box.AddWidget(labelMode, 0, 0, 0)
+
+	comb := widgets.NewQComboBox(window)
+	comb.AddItems([]string{"AES CFB", "AES CTR"})
+	box.AddWidget(comb, 0, 1, 0)
+
 	labelPwd := widgets.NewQLabel2(T("Password:"), window, core.Qt__Widget)
-	box.AddWidget(labelPwd, 0, 0, 0)
+	box.AddWidget(labelPwd, 1, 0, 0)
 
 	editPwd := widgets.NewQLineEdit(window)
 	editPwd.SetEchoMode(widgets.QLineEdit__Password)
-	box.AddWidget(editPwd, 0, 1, 0)
+	box.AddWidget(editPwd, 1, 1, 0)
 
 	labelCfm := widgets.NewQLabel2(T("Confirm:"), window, core.Qt__Widget)
-	box.AddWidget(labelCfm, 1, 0, 0)
+	box.AddWidget(labelCfm, 2, 0, 0)
 
 	editCfm := widgets.NewQLineEdit(window)
 	editCfm.SetEchoMode(widgets.QLineEdit__Password)
-	box.AddWidget(editCfm, 1, 1, 0)
+	box.AddWidget(editCfm, 2, 1, 0)
 
 	label1 := widgets.NewQLabel2(T("Input:"), window, core.Qt__Widget)
-	box.AddWidget(label1, 2, 0, 0)
+	box.AddWidget(label1, 3, 0, 0)
 
 	edit1 := widgets.NewQLineEdit(window)
 	edit1.SetPlaceholderText(T("Double click to select file."))
 	edit1.SetMinimumWidth(400)
-	box.AddWidget(edit1, 2, 1, 0)
+	box.AddWidget(edit1, 3, 1, 0)
 
 	edit1.ConnectMouseDoubleClickEvent(func(e *gui.QMouseEvent) {
 		path1 := widgets.QFileDialog_GetOpenFileName(window, T("Select a file to encrypt"), "", "", "", widgets.QFileDialog__ReadOnly)
@@ -174,12 +181,12 @@ func EncryptDialog() {
 	})
 
 	label2 := widgets.NewQLabel2(T("Output:"), window, core.Qt__Widget)
-	box.AddWidget(label2, 3, 0, 0)
+	box.AddWidget(label2, 4, 0, 0)
 
 	edit2 := widgets.NewQLineEdit(window)
 	edit2.SetPlaceholderText(T("Double click to select directory."))
 	edit2.SetMinimumWidth(400)
-	box.AddWidget(edit2, 3, 1, 0)
+	box.AddWidget(edit2, 4, 1, 0)
 
 	edit2.ConnectMouseDoubleClickEvent(func(e *gui.QMouseEvent) {
 		path1 := widgets.QFileDialog_GetExistingDirectory(window, T("Select a file to encrypt"), "", widgets.QFileDialog__ShowDirsOnly)
@@ -188,7 +195,7 @@ func EncryptDialog() {
 	})
 
 	button1 := widgets.NewQPushButton2(T("Encrypt"), window)
-	box.AddWidget3(button1, 4, 0, 1, 2, 0)
+	box.AddWidget3(button1, 5, 0, 1, 2, 0)
 
 	button1.ConnectClicked(func(b bool) {
 		src := edit1.Text()
@@ -204,8 +211,14 @@ func EncryptDialog() {
 			widgets.QMessageBox_About(window, T("Passwords are inconsistent"), T("Passwords are inconsistent"))
 			return
 		}
+		var err error
+		switch comb.CurrentIndex() {
+		case 0:
+			err = mycrypto.CfbEncryptoToFile(src, dst, pwd)
+		case 1:
+			err = mycrypto.EncryptoToFile(src, dst, pwd)
+		}
 
-		err := mycrypto.EncryptoToFile(src, dst, pwd)
 		if err != nil {
 			widgets.QMessageBox_About(window, T("Error"), err.Error())
 			window.Close()
